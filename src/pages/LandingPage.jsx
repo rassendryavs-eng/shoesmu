@@ -660,8 +660,8 @@ export const LandingPage = () => {
               <div className="flex items-center justify-between">
                 <h3 className="text-[15px] font-bold text-ink">Recent Orders</h3>
                 <Link
-                  to="/orders"
-                  className="text-[12px] font-bold text-gray-600 hover:text-black transition-colors"
+                  to="/login"
+                  className="text-[12px] font-bold text-gray-600 hover:text-black transition-colors cursor-pointer"
                 >
                   Lihat semua →
                 </Link>
