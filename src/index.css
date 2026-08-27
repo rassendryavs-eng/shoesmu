@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-ink: #111111;
+    --color-canvas: #ffffff;
+    --color-soft-cloud: #f5f5f5;
+    --color-hairline: #cacacb;
+    --color-hairline-soft: #e5e5e5;
+  }
+
+  body {
+    @apply bg-canvas text-ink font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: #111111;
+  }
+
+  /* Custom Clean Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #d5d7da;
+    border-radius: 9999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a3a7ae;
+  }
+}
+
+@layer components {
+  /* Nike Primary Pill CTA */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-ink text-white font-medium text-text2 h-10 px-5 rounded-full hover:bg-black active:scale-95 transition-all duration-150 select-none;
+  }
+
+  /* Nike Secondary Soft Pill CTA */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 bg-soft-cloud text-ink font-medium text-text2 h-10 px-5 rounded-full hover:bg-gray-200 active:scale-95 transition-all duration-150 select-none;
+  }
+
+  /* Nike Outline Pill CTA */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 bg-canvas text-ink border border-hairline font-medium text-text2 h-10 px-5 rounded-full hover:bg-soft-cloud hover:border-gray-400 active:scale-95 transition-all duration-150 select-none;
+  }
+
+  /* Nike Danger Pill CTA */
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 bg-error-50 text-error-600 border border-error-200 font-medium text-text2 h-10 px-5 rounded-full hover:bg-error-100 active:scale-95 transition-all duration-150 select-none;
+  }
+
+  /* Circular Icon Button */
+  .btn-icon-circular {
+    @apply inline-flex items-center justify-center w-10 h-10 rounded-full bg-soft-cloud text-ink hover:bg-gray-200 active:scale-90 transition-all duration-150;
+  }
+
+  /* Search Pill Input */
+  .search-pill-container {
+    @apply relative flex items-center bg-soft-cloud text-ink rounded-full px-3.5 h-10 transition-all border border-transparent focus-within:border-ink focus-within:bg-canvas focus-within:ring-4 focus-within:ring-soft-cloud;
+  }
+
+  /* Filter Chip */
+  .filter-chip {
+    @apply inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-text2 font-medium border border-hairline bg-canvas text-ink hover:border-gray-400 transition-colors cursor-pointer select-none;
+  }
+
+  .filter-chip-active {
+    @apply inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-text2 font-medium border border-ink bg-ink text-white transition-colors cursor-pointer select-none;
+  }
+
+  /* Flat Card Surface */
+  .card-flat {
+    @apply bg-canvas border border-gray-200 rounded-none shadow-none;
+  }
+
+  /* Hairline Dividers */
+  .hairline-b {
+    @apply border-b border-gray-200;
+  }
+
+  .hairline-t {
+    @apply border-t border-gray-200;
+  }
+
+  .hairline-r {
+    @apply border-r border-gray-200;
+  }
+
+  .hairline-l {
+    @apply border-l border-gray-200;
+  }
+}
+
