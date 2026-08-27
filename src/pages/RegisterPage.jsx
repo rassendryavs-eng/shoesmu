@@ -54,9 +54,9 @@ export const RegisterPage = () => {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row font-sans selection:bg-ink selection:text-white bg-[#0D0D11]">
       {/* ========================================================================= */}
-      {/* LEFT COLUMN — Clean Minimal Editorial Brand Hero */}
+      {/* LEFT COLUMN — Clean Minimal Editorial Brand Hero (Locked Position)        */}
       {/* ========================================================================= */}
-      <div className="w-full lg:w-1/2 bg-black text-white p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[420px] lg:min-h-screen relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10">
+      <div className="w-full lg:w-1/2 lg:h-screen lg:sticky lg:top-0 bg-black text-white p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[420px] relative overflow-hidden shrink-0 border-b lg:border-b-0 lg:border-r border-white/10 select-none">
         {/* Top Header / Brand Logo */}
         <Link to="/" className="flex items-center gap-2 z-10 group w-fit">
           <span className="font-extrabold text-2xl tracking-tight text-white font-sans lowercase">
