@@ -584,7 +584,7 @@ export const LandingPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Monthly Sales Interactive Bar Chart Preview (2 Cols) */}
           <div className="lg:col-span-2 bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-card-elevated hover:shadow-card-hover hover:border-gray-300 transition-all duration-300 space-y-6">
             <div className="flex items-center justify-between">
@@ -662,15 +662,20 @@ export const LandingPage = () => {
               })}
             </div>
 
-            <div className="flex items-center justify-between text-xs text-gray-500 font-medium">
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#111111] shadow-2xs" />
-                {selectedYear === "2026" ? "Tahun 2026 (Peak)" : "Tahun 2025 (Peak)"}
-              </span>
-              <span className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-                Volume Penjualan
-              </span>
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-gray-500 font-medium">
+              <div className="flex items-center gap-4">
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#111111] shadow-2xs" />
+                  {selectedYear === "2026" ? "Tahun 2026 (Peak)" : "Tahun 2025 (Peak)"}
+                </span>
+                <span className="flex items-center gap-2">
+                  <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+                  Volume Penjualan
+                </span>
+              </div>
+              <div className="bg-gray-100/80 border border-gray-200/80 px-3 py-1 rounded-full text-[11px] font-bold text-ink shadow-2xs">
+                Total Revenue {selectedYear}: {selectedYear === "2026" ? "$1,054,000" : "$798,000"}
+              </div>
             </div>
           </div>
 
