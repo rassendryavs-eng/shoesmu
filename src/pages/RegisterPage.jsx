@@ -23,12 +23,21 @@ export const RegisterPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const userEmail = (email || "admin@shoesmu.com").trim().toLowerCase();
+
+    // Save newly registered email to localStorage
+    const savedRegistered = JSON.parse(localStorage.getItem("shoesmu_registered_users") || "[]");
+    if (!savedRegistered.includes(userEmail)) {
+      savedRegistered.push(userEmail);
+      localStorage.setItem("shoesmu_registered_users", JSON.stringify(savedRegistered));
+    }
+
     const fullName = `${firstName} ${lastName}`.trim() || "Admin User";
     const initials = `${firstName?.[0] || ""}${lastName?.[0] || ""}`.toUpperCase() || "AU";
     login({
       id: "u-" + Date.now(),
       name: fullName,
-      email: email || "admin@shoesmu.com",
+      email: userEmail,
       role: "super_admin",
       roleLabel: "Super Admin",
       avatar: null,

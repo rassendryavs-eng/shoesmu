@@ -8,6 +8,8 @@ import {
   Shield,
   ArrowRight,
   CheckCircle2,
+  AlertCircle,
+  X,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { MOCK_USERS } from "../data/mockData";
@@ -21,9 +23,11 @@ export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [role, setRole] = useState("super_admin");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleQuickRoleSelect = (selectedRole) => {
     setRole(selectedRole);
+    setErrorMessage("");
     if (MOCK_USERS[selectedRole]) {
       setEmail(MOCK_USERS[selectedRole].email);
       setPassword(selectedRole === "super_admin" ? "admin123" : "staff123");
@@ -32,6 +36,25 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const trimmedEmail = email.trim().toLowerCase();
+
+    // Registered users list from localStorage & mock defaults
+    const savedRegistered = JSON.parse(localStorage.getItem("shoesmu_registered_users") || "[]");
+    const validEmails = [
+      MOCK_USERS.super_admin.email.toLowerCase(),
+      MOCK_USERS.staff.email.toLowerCase(),
+      "admin@shoesmu.com",
+      "alex@shoesmu.com",
+      "sam@shoesmu.com",
+      ...savedRegistered.map((u) => (typeof u === "string" ? u.toLowerCase() : u.email?.toLowerCase())),
+    ];
+
+    if (!validEmails.includes(trimmedEmail)) {
+      setErrorMessage(`Akun dengan email "${email}" belum terdaftar. Silakan buat akun baru terlebih dahulu.`);
+      return;
+    }
+
+    setErrorMessage("");
     login(role, email);
     navigate("/dashboard");
   };
@@ -184,6 +207,33 @@ export const LoginPage = () => {
               </button>
             </div>
           </div>
+
+          {/* Unregistered Account Error Notification Banner */}
+          {errorMessage && (
+            <div className="mb-5 p-4 rounded-xl bg-error-50 border border-error-200 text-error-700 flex items-start gap-3 text-[13.5px] animate-in fade-in slide-in-from-top-2 duration-200 shadow-2xs">
+              <AlertCircle className="w-5 h-5 text-error-600 shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <div className="font-bold text-error-900 mb-0.5">Akun Belum Terdaftar</div>
+                <div className="text-gray-700 font-medium leading-relaxed">{errorMessage}</div>
+                <div className="mt-2.5">
+                  <Link
+                    to="/register"
+                    className="inline-flex items-center gap-1 font-bold text-error-800 underline hover:text-error-950 text-xs"
+                  >
+                    Daftar akun baru di sini →
+                  </Link>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setErrorMessage("")}
+                className="text-error-400 hover:text-error-700 p-0.5 rounded-lg transition-colors cursor-pointer"
+                aria-label="Tutup notifikasi"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          )}
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
