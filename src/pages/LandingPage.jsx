@@ -584,9 +584,9 @@ export const LandingPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {/* Monthly Sales Interactive Bar Chart Preview (2 Cols) */}
-          <div className="lg:col-span-2 bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-card-elevated hover:shadow-card-hover hover:border-gray-300 transition-all duration-300 space-y-6">
+          <div className="lg:col-span-2 bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-card-elevated hover:shadow-card-hover hover:border-gray-300 transition-all duration-300 flex flex-col justify-between h-full space-y-6">
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-[16px] font-bold text-ink">Monthly Sales</h3>
@@ -621,7 +621,7 @@ export const LandingPage = () => {
             </div>
 
             {/* Custom Bar Visualizer */}
-            <div className="h-64 flex items-end justify-between gap-2 pt-6 pb-2 border-b border-gray-100">
+            <div className="flex-1 min-h-[300px] sm:min-h-[330px] flex items-end justify-between gap-2 pt-6 pb-2 border-b border-gray-100">
               {(selectedYear === "2026" ? MONTHLY_SALES_2026 : MONTHLY_SALES_2025).map((item, idx, arr) => {
                 const maxVal = 180000;
                 const heightPercent = Math.round((item.revenue / maxVal) * 100);
@@ -631,7 +631,7 @@ export const LandingPage = () => {
                 return (
                   <div
                     key={item.month}
-                    className="flex-1 flex flex-col items-center gap-2 group relative cursor-pointer"
+                    className="flex-1 h-full flex flex-col items-center justify-end gap-2 group relative cursor-pointer"
                     onMouseEnter={() => setHoveredBar(idx)}
                     onMouseLeave={() => setHoveredBar(null)}
                   >
@@ -642,7 +642,7 @@ export const LandingPage = () => {
                       </div>
                     )}
 
-                    <div className="w-full bg-gray-100 rounded-t-md h-52 flex items-end overflow-hidden">
+                    <div className="w-full bg-gray-100 rounded-t-md flex-1 min-h-[220px] flex items-end overflow-hidden">
                       <div
                         className={`w-full rounded-t-md transition-all duration-300 ${
                           isCurrent
@@ -662,7 +662,7 @@ export const LandingPage = () => {
               })}
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-gray-500 font-medium">
+            <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-gray-500 font-medium pt-1">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-[#111111] shadow-2xs" />
