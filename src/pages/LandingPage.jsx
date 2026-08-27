@@ -449,30 +449,30 @@ export const LandingPage = () => {
               {/* Radial Lighting Glow Behind Shoe Container */}
               <div className="absolute inset-0 bg-radial from-black/[0.08] via-transparent to-transparent rounded-full blur-2xl pointer-events-none" />
 
-              <div className="relative w-full max-w-sm rounded-2xl bg-white/90 backdrop-blur-md p-6 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.12)] border border-gray-200/80 group-hover:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.2)] hover:-translate-y-1 transition-all duration-300">
+              <div className="relative w-full max-w-sm rounded-2xl bg-white/95 backdrop-blur-md p-6 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.1)] border border-gray-200/80 hover:shadow-[0_25px_55px_-10px_rgba(0,0,0,0.18)] hover:-translate-y-2 hover:border-black/30 transition-all duration-500 ease-out cursor-pointer group/card">
                 {/* Pedestal Cast Shadow underneath shoe */}
-                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-3/4 h-5 bg-black/25 rounded-[100%] blur-md pointer-events-none group-hover:scale-110 group-hover:bg-black/35 transition-all duration-300" />
+                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-3/4 h-5 bg-black/20 rounded-[100%] blur-md pointer-events-none group-hover/card:scale-110 group-hover/card:bg-black/35 transition-all duration-500 ease-out" />
 
                 <img
                   src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=700"
                   alt="Nike Dunk Low Retro"
-                  className="relative z-10 w-full h-48 sm:h-56 object-contain drop-shadow-[0_15px_20px_rgba(0,0,0,0.25)] group-hover:scale-105 group-hover:-translate-y-1 transition-all duration-300"
+                  className="relative z-10 w-full h-48 sm:h-56 object-contain drop-shadow-[0_15px_22px_rgba(0,0,0,0.22)] group-hover/card:scale-108 group-hover/card:-translate-y-2 group-hover/card:drop-shadow-[0_22px_32px_rgba(0,0,0,0.32)] transition-all duration-500 ease-out transform-gpu"
                 />
 
                 {/* Floating Top Selling Badge */}
                 <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
                   <div>
-                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block">
+                    <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest block group-hover/card:text-gray-500 transition-colors duration-300">
                       TOP SELLING PRODUCT
                     </span>
-                    <span className="text-[13.5px] font-bold text-ink block">
+                    <span className="text-[13.5px] font-bold text-ink block group-hover/card:text-black transition-colors duration-300">
                       Nike Dunk Low Retro
                     </span>
                     <span className="text-[11.5px] text-gray-500 font-medium">
                       128 orders · $14,080 gross
                     </span>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold border border-emerald-200 shadow-2xs">
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold border border-emerald-200/80 shadow-2xs group-hover/card:bg-emerald-100 group-hover/card:border-emerald-300 transition-colors duration-300">
                     Active
                   </span>
                 </div>
