@@ -165,11 +165,42 @@ const RECENT_ORDERS_PREVIEW = [
   },
 ];
 
+const MONTHLY_SALES_2026 = [
+  { month: "Jan", revenue: 58000, orders: 380 },
+  { month: "Feb", revenue: 64000, orders: 410 },
+  { month: "Mar", revenue: 62000, orders: 390 },
+  { month: "Apr", revenue: 76000, orders: 490 },
+  { month: "May", revenue: 74000, orders: 470 },
+  { month: "Jun", revenue: 86000, orders: 560 },
+  { month: "Jul", revenue: 95000, orders: 610 },
+  { month: "Aug", revenue: 92000, orders: 590 },
+  { month: "Sep", revenue: 102000, orders: 660 },
+  { month: "Oct", revenue: 106000, orders: 690 },
+  { month: "Nov", revenue: 112000, orders: 730 },
+  { month: "Dec", revenue: 124000, orders: 810 },
+];
+
+const MONTHLY_SALES_2025 = [
+  { month: "Jan", revenue: 42000, orders: 280 },
+  { month: "Feb", revenue: 48000, orders: 310 },
+  { month: "Mar", revenue: 45000, orders: 290 },
+  { month: "Apr", revenue: 52000, orders: 340 },
+  { month: "May", revenue: 58000, orders: 380 },
+  { month: "Jun", revenue: 64000, orders: 410 },
+  { month: "Jul", revenue: 70000, orders: 450 },
+  { month: "Aug", revenue: 68000, orders: 430 },
+  { month: "Sep", revenue: 75000, orders: 480 },
+  { month: "Oct", revenue: 80000, orders: 510 },
+  { month: "Nov", revenue: 86000, orders: 550 },
+  { month: "Dec", revenue: 95000, orders: 600 },
+];
+
 export const LandingPage = () => {
   const { isAuthenticated, currentUser } = useAuth();
   const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [hoveredBar, setHoveredBar] = useState(null);
+  const [selectedYear, setSelectedYear] = useState("2026");
 
   const scrollToSection = (id) => {
     const el = document.getElementById(id);
@@ -564,20 +595,38 @@ export const LandingPage = () => {
                 </p>
               </div>
               <div className="flex items-center gap-1 bg-gray-100 p-1 rounded-lg text-[11px] font-bold text-gray-600 border border-gray-200/70 shadow-2xs">
-                <span className="px-2 py-0.5 rounded bg-white text-black shadow-xs">
+                <button
+                  type="button"
+                  onClick={() => setSelectedYear("2026")}
+                  className={`px-2.5 py-1 rounded-md transition-all cursor-pointer select-none ${
+                    selectedYear === "2026"
+                      ? "bg-white text-black shadow-xs font-extrabold"
+                      : "text-gray-500 hover:text-black font-semibold"
+                  }`}
+                >
                   2026
-                </span>
-                <span className="px-2 py-0.5">2025</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedYear("2025")}
+                  className={`px-2.5 py-1 rounded-md transition-all cursor-pointer select-none ${
+                    selectedYear === "2025"
+                      ? "bg-white text-black shadow-xs font-extrabold"
+                      : "text-gray-500 hover:text-black font-semibold"
+                  }`}
+                >
+                  2025
+                </button>
               </div>
             </div>
 
             {/* Custom Bar Visualizer */}
             <div className="h-64 flex items-end justify-between gap-2 pt-6 pb-2 border-b border-gray-100">
-              {MOCK_MONTHLY_SALES.map((item, idx) => {
+              {(selectedYear === "2026" ? MONTHLY_SALES_2026 : MONTHLY_SALES_2025).map((item, idx, arr) => {
                 const maxVal = 180000;
                 const heightPercent = Math.round((item.revenue / maxVal) * 100);
                 const isHovered = hoveredBar === idx;
-                const isCurrent = idx === MOCK_MONTHLY_SALES.length - 1;
+                const isCurrent = idx === arr.length - 1;
 
                 return (
                   <div
@@ -616,11 +665,11 @@ export const LandingPage = () => {
             <div className="flex items-center justify-between text-xs text-gray-500 font-medium">
               <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-[#111111] shadow-2xs" />
-                Bulan Ini (Peak)
+                {selectedYear === "2026" ? "Tahun 2026 (Peak)" : "Tahun 2025 (Peak)"}
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-                Periode Lalu
+                Volume Penjualan
               </span>
             </div>
           </div>
