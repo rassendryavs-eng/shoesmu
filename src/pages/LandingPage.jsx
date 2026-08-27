@@ -221,51 +221,51 @@ export const LandingPage = () => {
       {/* 1. TOP NAVIGATION BAR                                                     */}
       {/* ========================================================================= */}
       <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
-          {/* Brand Logo */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between relative">
+          {/* Brand Logo - Far Left */}
           <Link
             to="/"
-            className="flex items-center gap-1.5 group cursor-pointer select-none"
+            className="flex items-center gap-1.5 group cursor-pointer select-none z-10"
           >
             <span className="font-extrabold text-2xl sm:text-3xl tracking-tight text-ink lowercase">
               shoesmu.
             </span>
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-[14.5px] font-semibold text-gray-600">
+          {/* Desktop Navigation Links - Perfectly Centered */}
+          <nav className="hidden md:flex items-center gap-8 text-[14.5px] font-semibold text-gray-600 absolute left-1/2 -translate-x-1/2 z-10">
             <button
               type="button"
               onClick={() => scrollToSection("brands")}
-              className="hover:text-black transition-colors cursor-pointer"
+              className="hover:text-black transition-colors cursor-pointer py-1"
             >
               Brands
             </button>
             <button
               type="button"
               onClick={() => scrollToSection("analytics")}
-              className="hover:text-black transition-colors cursor-pointer"
+              className="hover:text-black transition-colors cursor-pointer py-1"
             >
               Our Promise
             </button>
             <button
               type="button"
               onClick={() => scrollToSection("features")}
-              className="hover:text-black transition-colors cursor-pointer"
+              className="hover:text-black transition-colors cursor-pointer py-1"
             >
               Drops
             </button>
             <button
               type="button"
               onClick={() => scrollToSection("pricing")}
-              className="hover:text-black transition-colors cursor-pointer"
+              className="hover:text-black transition-colors cursor-pointer py-1"
             >
               Pricing
             </button>
           </nav>
 
-          {/* Right Action CTA: Sign in & Sign up */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Right Action CTA: Sign in & Sign up - Far Right */}
+          <div className="hidden md:flex items-center gap-3 z-10">
             <Link
               to="/login"
               className="text-gray-700 hover:text-black font-semibold text-[14px] px-3.5 py-2 transition-colors cursor-pointer"
