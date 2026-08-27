@@ -215,8 +215,8 @@ export const LoginPage = () => {
                 <AlertCircle className="w-4 h-4 text-error-600 shrink-0" />
                 <span className="font-medium text-error-900 truncate">
                   Akun belum terdaftar.{" "}
-                  <Link to="/register" className="font-bold underline text-error-950 hover:text-black">
-                    Daftar akun →
+                  <Link to="/register" className="font-bold text-error-950 hover:text-black transition-colors">
+                    Daftar akun
                   </Link>
                 </span>
               </div>
