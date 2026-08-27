@@ -456,7 +456,7 @@ export const LandingPage = () => {
                 <img
                   src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=700"
                   alt="Nike Dunk Low Retro"
-                  className="relative z-10 w-full h-48 sm:h-56 object-contain drop-shadow-[0_15px_22px_rgba(0,0,0,0.22)] group-hover/card:scale-108 group-hover/card:-translate-y-2 group-hover/card:drop-shadow-[0_22px_32px_rgba(0,0,0,0.32)] transition-all duration-500 ease-out transform-gpu"
+                  className="relative z-10 w-full h-48 sm:h-56 object-cover rounded-2xl shadow-xs drop-shadow-[0_12px_20px_rgba(0,0,0,0.2)] group-hover/card:scale-105 group-hover/card:-translate-y-1.5 group-hover/card:shadow-md transition-all duration-500 ease-out transform-gpu"
                 />
 
                 {/* Floating Top Selling Badge */}
