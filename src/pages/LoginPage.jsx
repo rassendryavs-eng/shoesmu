@@ -208,29 +208,25 @@ export const LoginPage = () => {
             </div>
           </div>
 
-          {/* Unregistered Account Error Notification Banner */}
+          {/* Unregistered Account Compact Error Notification */}
           {errorMessage && (
-            <div className="mb-5 p-4 rounded-xl bg-error-50 border border-error-200 text-error-700 flex items-start gap-3 text-[13.5px] animate-in fade-in slide-in-from-top-2 duration-200 shadow-2xs">
-              <AlertCircle className="w-5 h-5 text-error-600 shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <div className="font-bold text-error-900 mb-0.5">Akun Belum Terdaftar</div>
-                <div className="text-gray-700 font-medium leading-relaxed">{errorMessage}</div>
-                <div className="mt-2.5">
-                  <Link
-                    to="/register"
-                    className="inline-flex items-center gap-1 font-bold text-error-800 underline hover:text-error-950 text-xs"
-                  >
-                    Daftar akun baru di sini →
+            <div className="mb-3.5 px-3.5 py-2.5 rounded-lg bg-error-50 border border-error-200 text-error-800 flex items-center justify-between gap-2.5 text-[12.5px] animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="flex items-center gap-2 min-w-0">
+                <AlertCircle className="w-4 h-4 text-error-600 shrink-0" />
+                <span className="font-medium text-error-900 truncate">
+                  Akun belum terdaftar.{" "}
+                  <Link to="/register" className="font-bold underline text-error-950 hover:text-black">
+                    Daftar akun →
                   </Link>
-                </div>
+                </span>
               </div>
               <button
                 type="button"
                 onClick={() => setErrorMessage("")}
-                className="text-error-400 hover:text-error-700 p-0.5 rounded-lg transition-colors cursor-pointer"
+                className="text-error-400 hover:text-error-700 p-0.5 rounded shrink-0 transition-colors cursor-pointer"
                 aria-label="Tutup notifikasi"
               >
-                <X className="w-4 h-4" />
+                <X className="w-3.5 h-3.5" />
               </button>
             </div>
           )}
