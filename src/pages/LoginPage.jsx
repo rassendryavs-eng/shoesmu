@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Eye,
@@ -24,6 +24,16 @@ export const LoginPage = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [role, setRole] = useState("super_admin");
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Auto-dismiss notification after 2 seconds (2000ms)
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
 
   const handleQuickRoleSelect = (selectedRole) => {
     setRole(selectedRole);
