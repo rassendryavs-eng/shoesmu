@@ -48,14 +48,14 @@ export const LoginPage = () => {
       {/* ========================================================================= */}
       <div className="w-full lg:w-1/2 bg-black text-white p-8 sm:p-12 lg:p-16 flex flex-col justify-between min-h-[420px] lg:min-h-screen relative overflow-hidden border-b lg:border-b-0 lg:border-r border-white/10">
         {/* Top Header / Brand Logo */}
-        <div className="flex items-center gap-2 z-10">
+        <Link to="/" className="flex items-center gap-2 z-10 group w-fit">
           <span className="font-extrabold text-2xl tracking-tight text-white font-sans lowercase">
-            shoesmu.
+            shoesmu<span className="text-black">.</span>
           </span>
-          <span className="text-[10px] font-semibold text-gray-400 tracking-[0.25em] uppercase ml-1">
+          <span className="text-[10px] font-semibold text-gray-400 tracking-[0.25em] uppercase ml-1 group-hover:text-white transition-colors">
             ADMIN
           </span>
-        </div>
+        </Link>
 
         {/* Center Headline & Subtitle */}
         <div className="max-w-md my-auto py-12 lg:py-0 z-10">

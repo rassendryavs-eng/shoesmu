@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLayout from "../layouts/AuthLayout";
 
-// Pages
+import LandingPage from "../pages/LandingPage";
 import DashboardPage from "../pages/DashboardPage";
 import ProductsPage from "../pages/ProductsPage";
 import ProductDetailPage from "../pages/ProductDetailPage";
@@ -25,8 +25,8 @@ import NotFoundPage from "../pages/NotFoundPage";
 export const AppRoutes = () => {
   return (
     <Routes>
-      {/* Default Root Redirects to Dashboard */}
-      <Route path="/" element={<Navigate to="/dashboard" replace />} />
+      {/* Landing Page (Public Pre-Sign-In Page) */}
+      <Route path="/" element={<LandingPage />} />
 
       {/* Auth Routes */}
       <Route element={<AuthLayout />}>
