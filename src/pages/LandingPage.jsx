@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   TrendingUp,
@@ -195,6 +196,47 @@ const MONTHLY_SALES_2025 = [
   { month: "Dec", revenue: 95000, orders: 600 },
 ];
 
+// Motion animation variants for 'On Appear Layer View'
+const fadeInUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1.0] },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.05,
+    },
+  },
+};
+
+const heroContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.12,
+      delayChildren: 0.08,
+    },
+  },
+};
+
+const heroItemVariants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.215, 0.61, 0.355, 1.0] },
+  },
+};
+
 export const LandingPage = () => {
   const { isAuthenticated, currentUser } = useAuth();
   const navigate = useNavigate();
@@ -212,7 +254,7 @@ export const LandingPage = () => {
 
   return (
     <div className="min-h-screen bg-canvas text-ink font-sans antialiased selection:bg-[#111111] selection:text-white relative overflow-hidden">
-      {/* Background Ambient Lighting Spotlights (Black Monochromatic Glows) */}
+      {/* Background Ambient Lighting Spotlights */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial-spotlight pointer-events-none -z-10" />
       <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] bg-black/[0.025] rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="absolute top-2/3 -left-40 w-[600px] h-[600px] bg-black/[0.02] rounded-full blur-3xl pointer-events-none -z-10" />
@@ -220,7 +262,12 @@ export const LandingPage = () => {
       {/* ========================================================================= */}
       {/* 1. TOP NAVIGATION BAR                                                     */}
       {/* ========================================================================= */}
-      <header className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all">
+      <motion.header
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="sticky top-0 z-50 bg-white/85 backdrop-blur-xl border-b border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-all"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between relative">
           {/* Brand Logo - Far Left */}
           <Link
@@ -341,7 +388,7 @@ export const LandingPage = () => {
             </div>
           </div>
         )}
-      </header>
+      </motion.header>
 
       {/* ========================================================================= */}
       {/* 2. HERO HEADER SECTION                                                    */}
@@ -350,26 +397,43 @@ export const LandingPage = () => {
         {/* Subtle radial light spotlight behind text */}
         <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-b from-black/[0.04] via-black/[0.015] to-transparent rounded-full blur-2xl pointer-events-none -z-10" />
 
-        <div className="text-center max-w-3xl mx-auto space-y-6 sm:space-y-8">
+        <motion.div
+          variants={heroContainerVariants}
+          initial="hidden"
+          animate="visible"
+          className="text-center max-w-3xl mx-auto space-y-6 sm:space-y-8"
+        >
           {/* Est. 2024 Pill Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/90 text-[12.5px] font-semibold text-gray-800 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_18px_-2px_rgba(0,0,0,0.12)] transition-all">
+          <motion.div
+            variants={heroItemVariants}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-md border border-gray-200/90 text-[12.5px] font-semibold text-gray-800 shadow-[0_2px_12px_-2px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_18px_-2px_rgba(0,0,0,0.12)] transition-all"
+          >
             <span className="w-2 h-2 rounded-full bg-black animate-pulse shadow-[0_0_8px_rgba(0,0,0,0.6)]" />
             <span>Est. 2024 — Jakarta</span>
-          </div>
+          </motion.div>
 
           {/* Main Hero Display Heading */}
-          <h1 className="text-4xl sm:text-6xl lg:text-[68px] font-extrabold text-ink tracking-tight leading-[1.08]">
+          <motion.h1
+            variants={heroItemVariants}
+            className="text-4xl sm:text-6xl lg:text-[68px] font-extrabold text-ink tracking-tight leading-[1.08]"
+          >
             Sneakers worth <br className="hidden sm:inline" />
             stepping out in.
-          </h1>
+          </motion.h1>
 
           {/* Subheadline Copy */}
-          <p className="text-base sm:text-lg lg:text-[19px] text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto">
+          <motion.p
+            variants={heroItemVariants}
+            className="text-base sm:text-lg lg:text-[19px] text-gray-600 font-normal leading-relaxed max-w-2xl mx-auto"
+          >
             A tightly curated marketplace of seven legendary brands. Every pair verified, every release tracked, every order shipped within a day.
-          </p>
+          </motion.p>
 
           {/* Hero CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2">
+          <motion.div
+            variants={heroItemVariants}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 pt-2"
+          >
             <Link
               to="/login"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#111111] hover:bg-black text-white px-8 py-3.5 rounded-full font-extrabold text-[15px] shadow-black-glow hover:shadow-[0_16px_40px_-8px_rgba(17,17,17,0.5)] hover:-translate-y-0.5 transition-all active:scale-95 cursor-pointer"
@@ -385,10 +449,13 @@ export const LandingPage = () => {
             >
               Why Shoesmu
             </button>
-          </div>
+          </motion.div>
 
           {/* Three Key Metrics Row */}
-          <div className="pt-8 sm:pt-12 grid grid-cols-3 gap-4 max-w-lg mx-auto border-t border-gray-200/80 text-center">
+          <motion.div
+            variants={heroItemVariants}
+            className="pt-8 sm:pt-12 grid grid-cols-3 gap-4 max-w-lg mx-auto border-t border-gray-200/80 text-center"
+          >
             <div>
               <div className="text-2xl sm:text-3xl font-extrabold text-ink">7</div>
               <div className="text-[12px] sm:text-[13px] text-gray-500 font-medium mt-0.5">
@@ -407,11 +474,17 @@ export const LandingPage = () => {
                 Authentic
               </div>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Sneaker Showcase Hero Card + KPI Floating Cards */}
-        <div className="mt-14 sm:mt-18 relative max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 45, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 0.75, ease: [0.215, 0.61, 0.355, 1.0] }}
+          className="mt-14 sm:mt-18 relative max-w-5xl mx-auto"
+        >
           {/* Subtle Ambient Backing Glow */}
           <div className="absolute -inset-1 bg-gradient-to-r from-black/10 via-gray-400/20 to-black/10 rounded-[36px] blur-xl opacity-70 pointer-events-none" />
 
@@ -449,7 +522,11 @@ export const LandingPage = () => {
               {/* Radial Lighting Glow Behind Shoe Container */}
               <div className="absolute inset-0 bg-radial from-black/[0.08] via-transparent to-transparent rounded-full blur-2xl pointer-events-none" />
 
-              <div className="relative w-full max-w-sm rounded-2xl bg-white/95 backdrop-blur-md p-6 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.1)] border border-gray-200/80 hover:shadow-[0_25px_55px_-10px_rgba(0,0,0,0.18)] hover:-translate-y-2 hover:border-black/30 transition-all duration-500 ease-out cursor-pointer group/card">
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
+                className="relative w-full max-w-sm rounded-2xl bg-white/95 backdrop-blur-md p-6 shadow-[0_12px_30px_-8px_rgba(0,0,0,0.1)] border border-gray-200/80 hover:shadow-[0_25px_55px_-10px_rgba(0,0,0,0.18)] hover:border-black/30 transition-all duration-500 ease-out cursor-pointer group/card"
+              >
                 {/* Pedestal Cast Shadow underneath shoe */}
                 <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-3/4 h-5 bg-black/20 rounded-[100%] blur-md pointer-events-none group-hover/card:scale-110 group-hover/card:bg-black/35 transition-all duration-500 ease-out" />
 
@@ -476,13 +553,23 @@ export const LandingPage = () => {
                     Active
                   </span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
 
           {/* Quick 4 KPI Cards Strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6">
-            <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 hover:-translate-y-1 transition-all duration-300">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mt-6"
+          >
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ y: -4 }}
+              className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 transition-all duration-300"
+            >
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
                 TOTAL REVENUE
               </span>
@@ -492,9 +579,13 @@ export const LandingPage = () => {
               <div className="text-[11px] text-emerald-600 font-bold mt-0.5">
                 +18.4% vs last month
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 hover:-translate-y-1 transition-all duration-300">
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ y: -4 }}
+              className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 transition-all duration-300"
+            >
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
                 TOTAL ORDERS
               </span>
@@ -504,9 +595,13 @@ export const LandingPage = () => {
               <div className="text-[11px] text-emerald-600 font-bold mt-0.5">
                 +8.1% vs last month
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 hover:-translate-y-1 transition-all duration-300">
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ y: -4 }}
+              className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 transition-all duration-300"
+            >
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
                 TOTAL CUSTOMERS
               </span>
@@ -516,9 +611,13 @@ export const LandingPage = () => {
               <div className="text-[11px] text-emerald-600 font-bold mt-0.5">
                 +12.3% vs last month
               </div>
-            </div>
+            </motion.div>
 
-            <div className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 hover:-translate-y-1 transition-all duration-300">
+            <motion.div
+              variants={fadeInUp}
+              whileHover={{ y: -4 }}
+              className="bg-white/90 backdrop-blur-sm p-4 sm:p-5 rounded-2xl border border-gray-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_12px_30px_-6px_rgba(0,0,0,0.12)] hover:border-black/30 transition-all duration-300"
+            >
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block">
                 AVERAGE ORDER
               </span>
@@ -528,30 +627,36 @@ export const LandingPage = () => {
               <div className="text-[11px] text-gray-500 font-bold mt-0.5">
                 -1.4% vs last month
               </div>
-            </div>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* ========================================================================= */}
       {/* 3. SUPPORTED BRANDS STRIP                                                 */}
       {/* ========================================================================= */}
-      <section
+      <motion.section
         id="brands"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-40px" }}
+        variants={staggerContainer}
         className="py-12 border-y border-gray-200/80 bg-gradient-to-b from-[#FAFAFA] via-[#F5F5F5] to-[#FAFAFA] relative shadow-inner"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
+          <motion.div variants={fadeInUp} className="text-center mb-6">
             <span className="text-[11px] font-extrabold text-gray-400 uppercase tracking-widest">
               MENDUKUNG OPERASI 7 BRAND TERNAMA
             </span>
-          </div>
+          </motion.div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 lg:gap-14">
             {BRANDS.map((brand) => (
-              <div
+              <motion.div
                 key={brand.name}
-                className="group flex flex-col items-center cursor-default transition-transform hover:-translate-y-1"
+                variants={fadeInUp}
+                whileHover={{ scale: 1.05, y: -2 }}
+                className="group flex flex-col items-center cursor-default transition-transform"
               >
                 <span className="text-xl sm:text-2xl font-black text-gray-800 tracking-tighter group-hover:text-black transition-colors drop-shadow-2xs">
                   {brand.name}
@@ -559,11 +664,11 @@ export const LandingPage = () => {
                 <span className="text-[10px] text-gray-400 font-medium group-hover:text-gray-600 transition-colors">
                   {brand.tag}
                 </span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ========================================================================= */}
       {/* 4. LIVE DASHBOARD ANALYTICS PREVIEW SECTION                                */}
@@ -572,7 +677,13 @@ export const LandingPage = () => {
         {/* Subtle Ambient Backing Spotlight */}
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-black/[0.025] rounded-full blur-3xl pointer-events-none -z-10" />
 
-        <div className="max-w-3xl mb-12 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-12 text-left"
+        >
           <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
             OVERVIEW OPERASIONAL
           </span>
@@ -582,11 +693,17 @@ export const LandingPage = () => {
           <p className="text-[15px] text-gray-600 mt-2.5">
             Satu dashboard menyatukan KPI, grafik penjualan bulanan, target penjualan, dan pesanan terbaru — bersih tanpa spreadsheet.
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
           {/* Monthly Sales Interactive Bar Chart Preview (2 Cols) */}
-          <div className="lg:col-span-2 bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-card-elevated hover:shadow-card-hover hover:border-gray-300 transition-all duration-300 flex flex-col justify-between h-full space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 35 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-2 bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-card-elevated hover:shadow-card-hover hover:border-gray-300 transition-all duration-300 flex flex-col justify-between h-full space-y-6"
+          >
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-[16px] font-bold text-ink">Monthly Sales</h3>
@@ -620,7 +737,7 @@ export const LandingPage = () => {
               </div>
             </div>
 
-            {/* Custom Bar Visualizer */}
+            {/* Custom Bar Visualizer with Animated Fills */}
             <div className="flex-1 min-h-[300px] sm:min-h-[330px] flex items-end justify-between gap-2 pt-6 pb-2 border-b border-gray-100">
               {(selectedYear === "2026" ? MONTHLY_SALES_2026 : MONTHLY_SALES_2025).map((item, idx, arr) => {
                 const maxVal = 180000;
@@ -643,7 +760,11 @@ export const LandingPage = () => {
                     )}
 
                     <div className="w-full bg-gray-100 rounded-t-md flex-1 min-h-[220px] flex items-end overflow-hidden">
-                      <div
+                      <motion.div
+                        initial={{ height: 0 }}
+                        whileInView={{ height: `${heightPercent}%` }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.65, delay: idx * 0.035, ease: "easeOut" }}
                         className={`w-full rounded-t-md transition-all duration-300 ${
                           isCurrent
                             ? "bg-[#111111] shadow-[0_4px_14px_rgba(17,17,17,0.4)]"
@@ -651,7 +772,6 @@ export const LandingPage = () => {
                             ? "bg-black shadow-[0_4px_14px_rgba(0,0,0,0.3)]"
                             : "bg-gray-300 group-hover:bg-black"
                         }`}
-                        style={{ height: `${heightPercent}%` }}
                       />
                     </div>
                     <span className="text-[11px] font-semibold text-gray-500 group-hover:text-black">
@@ -677,10 +797,16 @@ export const LandingPage = () => {
                 Total Revenue {selectedYear}: {selectedYear === "2026" ? "$1,054,000" : "$798,000"}
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Goal Progress & Recent Orders (1 Col) */}
-          <div className="space-y-6">
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-40px" }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            className="space-y-6"
+          >
             {/* Sales Goal Card */}
             <div className="bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-5 sm:p-6 shadow-card-elevated hover:shadow-card-hover hover:border-gray-300 transition-all duration-300 space-y-4">
               <div className="flex items-center justify-between">
@@ -699,9 +825,15 @@ export const LandingPage = () => {
                 </div>
               </div>
 
-              {/* Progress Bar */}
+              {/* Progress Bar Animation */}
               <div className="w-full h-2.5 bg-gray-100 rounded-full overflow-hidden shadow-inner">
-                <div className="h-full bg-[#111111] rounded-full w-[68%] shadow-[0_2px_8px_rgba(17,17,17,0.4)]" />
+                <motion.div
+                  initial={{ width: 0 }}
+                  whileInView={{ width: "68%" }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  className="h-full bg-[#111111] rounded-full shadow-[0_2px_8px_rgba(17,17,17,0.4)]"
+                />
               </div>
 
               <p className="text-[11.5px] text-gray-400">
@@ -745,7 +877,7 @@ export const LandingPage = () => {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -757,7 +889,13 @@ export const LandingPage = () => {
         className="py-20 bg-[#FBFBFB] border-t border-gray-200/80 relative"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mb-14 text-left">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6 }}
+            className="max-w-3xl mb-14 text-left"
+          >
             <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
               KAPABILITAS LENGKAP
             </span>
@@ -767,16 +905,25 @@ export const LandingPage = () => {
             <p className="text-[15px] text-gray-600 mt-2.5">
               Didesain khusus untuk ritel sneaker dengan kecepatan, presisi stok, dan kontrol peran tanpa kompromi.
             </p>
-          </div>
+          </motion.div>
 
           {/* 6 Feature Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {FEATURES.map((feat) => {
               const Icon = feat.icon;
               return (
-                <div
+                <motion.div
                   key={feat.title}
-                  className="bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.12)] hover:border-black/30 hover:-translate-y-1 transition-all duration-300 space-y-4 group"
+                  variants={fadeInUp}
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.25 }}
+                  className="bg-white/90 backdrop-blur-sm border border-gray-200/80 rounded-2xl p-6 sm:p-7 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.12)] hover:border-black/30 transition-all duration-300 space-y-4 group"
                 >
                   <div className="flex items-center justify-between">
                     <div className="w-11 h-11 rounded-xl bg-gray-100 text-ink flex items-center justify-center group-hover:bg-[#111111] group-hover:text-white group-hover:shadow-[0_6px_20px_rgba(17,17,17,0.35)] transition-all duration-300">
@@ -795,14 +942,20 @@ export const LandingPage = () => {
                       {feat.description}
                     </p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* 3 Step Process Workflow */}
-          <div className="mt-16 pt-12 border-t border-gray-200/70 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="space-y-2">
+          <motion.div
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-40px" }}
+            className="mt-16 pt-12 border-t border-gray-200/70 grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            <motion.div variants={fadeInUp} className="space-y-2">
               <span className="text-[11px] font-mono font-bold text-gray-400">
                 01
               </span>
@@ -810,9 +963,9 @@ export const LandingPage = () => {
               <p className="text-[13px] text-gray-500 leading-relaxed">
                 Impor atau input SKU 7 brand sneaker dengan varian ukuran dan stok awal.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-2">
+            <motion.div variants={fadeInUp} className="space-y-2">
               <span className="text-[11px] font-mono font-bold text-gray-400">
                 02
               </span>
@@ -820,9 +973,9 @@ export const LandingPage = () => {
               <p className="text-[13px] text-gray-500 leading-relaxed">
                 KPI dan grafik otomatis terisi saat pesanan pertama masuk secara live.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-2">
+            <motion.div variants={fadeInUp} className="space-y-2">
               <span className="text-[11px] font-mono font-bold text-gray-400">
                 03
               </span>
@@ -830,8 +983,8 @@ export const LandingPage = () => {
               <p className="text-[13px] text-gray-500 leading-relaxed">
                 Proses pesanan, update nomor resi pengiriman, dan kelola promosi instan.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
@@ -842,7 +995,13 @@ export const LandingPage = () => {
         {/* Subtle Ambient Backdrop Glow */}
         <div className="absolute top-1/3 right-10 w-96 h-96 bg-black/[0.025] rounded-full blur-3xl pointer-events-none -z-10" />
 
-        <div className="max-w-3xl mb-14 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-14 text-left"
+        >
           <span className="text-[11px] font-bold text-gray-400 uppercase tracking-widest block mb-2">
             PAKET LANGGANAN
           </span>
@@ -852,12 +1011,21 @@ export const LandingPage = () => {
           <p className="text-[15px] text-gray-600 mt-2.5">
             Mulai gratis saat toko Anda masih kecil, naikkan saat volume pesanan bertambah.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch"
+        >
           {PRICING_PLANS.map((plan) => (
-            <div
+            <motion.div
               key={plan.id}
+              variants={fadeInUp}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.25 }}
               className={`rounded-2xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
                 plan.featured
                   ? "bg-[#111111] text-white border border-black shadow-[0_25px_60px_-15px_rgba(0,0,0,0.6)] scale-[1.02] relative overflow-hidden group"
@@ -932,7 +1100,7 @@ export const LandingPage = () => {
                 </ul>
               </div>
 
-              {/* Action Button: Links directly to Sign In (/login) */}
+              {/* Action Button */}
               <div className="pt-8 relative z-10">
                 <Link
                   to="/login"
@@ -945,16 +1113,22 @@ export const LandingPage = () => {
                   {plan.buttonText}
                 </Link>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================================================= */}
       {/* 7. HIGH IMPACT BOTTOM CTA BANNER                                          */}
       {/* ========================================================================= */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="bg-[#111111] text-white rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.7)] relative overflow-hidden border border-black/80 group">
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.7, ease: [0.215, 0.61, 0.355, 1.0] }}
+          className="bg-[#111111] text-white rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.7)] relative overflow-hidden border border-black/80 group"
+        >
           {/* Ambient Lighting Background Accents inside Banner */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[350px] bg-white/[0.06] rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -top-24 -right-24 w-80 h-80 bg-white/[0.08] rounded-full blur-3xl pointer-events-none group-hover:bg-white/10 transition-all duration-500" />
@@ -976,13 +1150,19 @@ export const LandingPage = () => {
               <ArrowRight className="w-4 h-4 text-black" />
             </Link>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ========================================================================= */}
       {/* 8. FOOTER                                                                 */}
       {/* ========================================================================= */}
-      <footer className="border-t border-gray-200 bg-white py-12 text-sm text-gray-500">
+      <motion.footer
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="border-t border-gray-200 bg-white py-12 text-sm text-gray-500"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
             <span className="font-extrabold text-xl text-ink lowercase">
@@ -1020,10 +1200,9 @@ export const LandingPage = () => {
             © 2026 Shoesmu Marketplace. All rights reserved.
           </div>
         </div>
-      </footer>
+      </motion.footer>
     </div>
   );
 };
 
 export default LandingPage;
-
